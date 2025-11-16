@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app">
+        <div id="loginPage" class="page active">
+            <div class="login-container">
+                <h1>Campus Management System</h1>
+                <form id="loginForm">
+                    <input type="email" id="loginEmail" placeholder="Email" required>
+                    <input type="password" id="loginPassword" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <p>Don't have an account? <a href="#" id="showRegister">Register</a></p>
+            </div>
+        </div>
+
+        <div id="registerPage" class="page">
+            <div class="login-container">
+                <h1>Register</h1>
+                <form id="registerForm">
+                    <input type="text" id="regName" placeholder="Full Name" required>
+                    <input type="email" id="regEmail" placeholder="Email" required>
+                    <input type="password" id="regPassword" placeholder="Password" required>
+                    <select id="regRole" required>
+                        <option value="student">Student</option>
+                        <option value="faculty">Faculty</option>
+                        <option value="club_admin">Club Admin</option>
+                    </select>
+                    <button type="submit">Register</button>
+                </form>
+                <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
+            </div>
+        </div>
+
+    
+        <div id="dashboardPage" class="page">
+            <nav class="navbar">
+                <h2>Campus Portal</h2>
+                <div class="nav-links">
+                    <a href="#" data-section="feed">Feed</a>
+                    <a href="#" data-section="events">Events</a>
+                    <a href="#" data-section="discussions">Discussions</a>
+                    <a href="#" data-section="resources">Resources</a>
+                    <a href="#" data-section="profile">Profile</a>
+                </div>
+                <div class="user-info">
+                    <span id="userName"></span>
+                    <button id="logoutBtn">Logout</button>
+                </div>
+            </nav>
+
+            <div class="dashboard-content">
+            
+                <div id="feedSection" class="section active">
+                    <h2>Campus Feed</h2>
+                    <div class="filter-bar">
+                        <select id="feedTypeFilter">
+                            <option value="all">All Posts</option>
+                            <option value="post">Posts</option>
+                            <option value="announcement">Announcements</option>
+                            <option value="notice">Notices</option>
+                        </select>
+                        <select id="feedCategoryFilter">
+                            <option value="all">All Categories</option>
+                            <option value="general">General</option>
+                            <option value="academic">Academic</option>
+                            <option value="cultural">Cultural</option>
+                            <option value="sports">Sports</option>
+                            <option value="technical">Technical</option>
+                        </select>
+                    </div>
+                    <div class="post-form">
+                        <select id="postType">
+                            <option value="post">Post</option>
+                            <option value="announcement">Announcement</option>
+                            <option value="notice">Notice</option>
+                        </select>
+                        <select id="postCategory">
+                            <option value="general">General</option>
+                            <option value="academic">Academic</option>
+                            <option value="cultural">Cultural</option>
+                            <option value="sports">Sports</option>
+                            <option value="technical">Technical</option>
+                        </select>
+                        <textarea id="postContent" placeholder="What's on your mind?"></textarea>
+                        <button id="createPostBtn">Post</button>
+                    </div>
+                    <div id="feedList"></div>
+                </div>
+
+            
+                <div id="eventsSection" class="section">
+                    <h2>Events</h2>
+                    <div class="filter-bar">
+                        <select id="eventCategoryFilter">
+                            <option value="all">All Categories</option>
+                            <option value="academic">Academic</option>
+                            <option value="cultural">Cultural</option>
+                            <option value="sports">Sports</option>
+                            <option value="technical">Technical</option>
+                        </select>
+                    </div>
+                    <button id="createEventBtn" class="btn-primary">Create Event</button>
+                    <div id="eventsList"></div>
+                </div>
+
+                <div id="discussionsSection" class="section">
+                    <h2>Discussion Board</h2>
+                    <div class="filter-bar">
+                        <select id="discussionTopicFilter">
+                            <option value="all">All Topics</option>
+                            <option value="general">General</option>
+                            <option value="academic">Academic</option>
+                            <option value="technical">Technical</option>
+                            <option value="events">Events</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <button id="createDiscussionBtn" class="btn-primary">New Discussion</button>
+                    <div id="discussionsList"></div>
+                </div>
+
+            
+                <div id="resourcesSection" class="section">
+                    <h2>Resources</h2>
+                    <div class="filter-bar">
+                        <select id="resourceCategoryFilter">
+                            <option value="all">All Categories</option>
+                            <option value="academic">Academic</option>
+                            <option value="cultural">Cultural</option>
+                            <option value="sports">Sports</option>
+                            <option value="technical">Technical</option>
+                            <option value="general">General</option>
+                        </select>
+                        <select id="resourceTypeFilter">
+                            <option value="all">All Types</option>
+                            <option value="pdf">PDF</option>
+                            <option value="doc">Documents</option>
+                            <option value="image">Images</option>
+                            <option value="video">Videos</option>
+                        </select>
+                    </div>
+                    <button id="uploadResourceBtn" class="btn-primary">Upload Resource</button>
+                    <div id="resourcesList"></div>
+                </div>
+
+                <div id="profileSection" class="section">
+                    <h2>My Profile</h2>
+                    <div id="profileContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="createEventModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('createEventModal')">&times;</span>
+            <h2>Create New Event</h2>
+            <form id="createEventForm">
+                <input type="text" id="eventTitle" placeholder="Event Title" required>
+                <textarea id="eventDescription" placeholder="Event Description" required></textarea>
+                <input type="datetime-local" id="eventDate" required>
+                <input type="text" id="eventLocation" placeholder="Location" required>
+                <select id="eventCategory" required>
+                    <option value="academic">Academic</option>
+                    <option value="cultural">Cultural</option>
+                    <option value="sports">Sports</option>
+                    <option value="technical">Technical</option>
+                </select>
+                <input type="number" id="eventMaxParticipants" placeholder="Max Participants (optional)">
+                <label>
+                    <input type="checkbox" id="eventRequiresApproval">
+                    Requires Approval
+                </label>
+                <button type="submit">Create Event</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="createDiscussionModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('createDiscussionModal')">&times;</span>
+            <h2>Start New Discussion</h2>
+            <form id="createDiscussionForm">
+                <input type="text" id="discussionTitle" placeholder="Discussion Title" required>
+                <select id="discussionTopic" required>
+                    <option value="general">General</option>
+                    <option value="academic">Academic</option>
+                    <option value="technical">Technical</option>
+                    <option value="events">Events</option>
+                    <option value="other">Other</option>
+                </select>
+                <textarea id="discussionContent" placeholder="Start the discussion..." required></textarea>
+                <button type="submit">Create Discussion</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="uploadResourceModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('uploadResourceModal')">&times;</span>
+            <h2>Upload Resource</h2>
+            <form id="uploadResourceForm">
+                <input type="text" id="resourceTitle" placeholder="Resource Title" required>
+                <textarea id="resourceDescription" placeholder="Description"></textarea>
+                <select id="resourceCategory" required>
+                    <option value="academic">Academic</option>
+                    <option value="cultural">Cultural</option>
+                    <option value="sports">Sports</option>
+                    <option value="technical">Technical</option>
+                    <option value="general">General</option>
+                </select>
+                <select id="resourceType" required>
+                    <option value="pdf">PDF</option>
+                    <option value="doc">Document</option>
+                    <option value="image">Image</option>
+                    <option value="video">Video</option>
+                    <option value="other">Other</option>
+                </select>
+                <input type="file" id="resourceFile" required>
+                <input type="text" id="resourceAllowedRoles" placeholder="Allowed Roles (comma-separated, or 'all')">
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

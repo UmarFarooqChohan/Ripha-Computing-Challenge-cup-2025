@@ -1,0 +1,180 @@
+<!-- Modal Templates - Include this in index.html before closing body tag -->
+
+<!-- Create Event Modal -->
+<div id="createEventModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('createEventModal')">&times;</span>
+        <h2>Create New Event</h2>
+        <form id="createEventForm">
+            <input type="text" id="eventTitle" placeholder="Event Title" required>
+            <textarea id="eventDescription" placeholder="Event Description" required></textarea>
+            <input type="datetime-local" id="eventDate" required>
+            <input type="text" id="eventLocation" placeholder="Location" required>
+            <select id="eventCategory" required>
+                <option value="academic">Academic</option>
+                <option value="cultural">Cultural</option>
+                <option value="sports">Sports</option>
+                <option value="technical">Technical</option>
+            </select>
+            <input type="number" id="eventMaxParticipants" placeholder="Max Participants (optional)">
+            <label>
+                <input type="checkbox" id="eventRequiresApproval">
+                Requires Approval
+            </label>
+            <button type="submit">Create Event</button>
+        </form>
+    </div>
+</div>
+
+<!-- Create Discussion Modal -->
+<div id="createDiscussionModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('createDiscussionModal')">&times;</span>
+        <h2>Start New Discussion</h2>
+        <form id="createDiscussionForm">
+            <input type="text" id="discussionTitle" placeholder="Discussion Title" required>
+            <select id="discussionTopic" required>
+                <option value="general">General</option>
+                <option value="academic">Academic</option>
+                <option value="technical">Technical</option>
+                <option value="events">Events</option>
+                <option value="other">Other</option>
+            </select>
+            <textarea id="discussionContent" placeholder="Start the discussion..." required></textarea>
+            <button type="submit">Create Discussion</button>
+        </form>
+    </div>
+</div>
+
+<!-- Upload Resource Modal -->
+<div id="uploadResourceModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('uploadResourceModal')">&times;</span>
+        <h2>Upload Resource</h2>
+        <form id="uploadResourceForm">
+            <input type="text" id="resourceTitle" placeholder="Resource Title" required>
+            <textarea id="resourceDescription" placeholder="Description"></textarea>
+            <select id="resourceCategory" required>
+                <option value="academic">Academic</option>
+                <option value="cultural">Cultural</option>
+                <option value="sports">Sports</option>
+                <option value="technical">Technical</option>
+                <option value="general">General</option>
+            </select>
+            <select id="resourceType" required>
+                <option value="pdf">PDF</option>
+                <option value="doc">Document</option>
+                <option value="image">Image</option>
+                <option value="video">Video</option>
+                <option value="other">Other</option>
+            </select>
+            <input type="file" id="resourceFile" required>
+            <input type="text" id="resourceAllowedRoles" placeholder="Allowed Roles (comma-separated, or 'all')">
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+</div>
+
+<!-- Event Feedback Modal -->
+<div id="feedbackModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('feedbackModal')">&times;</span>
+        <h2>Event Feedback</h2>
+        <form id="feedbackForm">
+            <input type="hidden" id="feedbackEventId">
+            <div class="rating-stars">
+                <span onclick="setRating(1)">⭐</span>
+                <span onclick="setRating(2)">⭐</span>
+                <span onclick="setRating(3)">⭐</span>
+                <span onclick="setRating(4)">⭐</span>
+                <span onclick="setRating(5)">⭐</span>
+            </div>
+            <input type="hidden" id="feedbackRating" value="5">
+            <textarea id="feedbackComment" placeholder="Your feedback..."></textarea>
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </div>
+</div>
+
+<style>
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-content input,
+.modal-content textarea,
+.modal-content select {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+.modal-content textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.modal-content button {
+    padding: 12px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.modal-content button:hover {
+    background: #5568d3;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #000;
+}
+
+.rating-stars {
+    font-size: 32px;
+    cursor: pointer;
+}
+
+.rating-stars span:hover {
+    transform: scale(1.2);
+}
+</style>
